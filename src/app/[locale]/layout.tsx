@@ -6,7 +6,8 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { ChatWidget } from "@/components/chat-widget";
+import { ContactWidget } from "@/components/contact-widget";
+import { site } from "@/lib/site";
 import "../globals.css";
 
 const fraunces = Fraunces({
@@ -36,10 +37,43 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "home" });
+  const tf = await getTranslations({ locale, namespace: "footer" });
+
+  const title = `${site.name} — ${tf("tagline")}`;
+  const description = t("subtitle");
 
   return {
-    title: `Tartoon — ${t("title1")} ${t("title2")}`,
-    description: t("subtitle"),
+    metadataBase: new URL(site.url),
+    title: {
+      default: title,
+      template: `%s — ${site.name}`,
+    },
+    description,
+    applicationName: site.name,
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        hy: "/hy",
+        ru: "/ru",
+        en: "/en",
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: site.name,
+      title,
+      description,
+      url: `${site.url}/${locale}`,
+      locale,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
+    icons: {
+      icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    },
   };
 }
 
@@ -56,7 +90,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  // Включает статический рендеринг страниц под текущую локаль
+  // Enables static rendering for the current locale
   setRequestLocale(locale);
 
   return (
@@ -68,7 +102,7 @@ export default async function LocaleLayout({
           <SiteHeader />
           <main>{children}</main>
           <SiteFooter />
-          <ChatWidget />
+          <ContactWidget />
         </NextIntlClientProvider>
       </body>
     </html>

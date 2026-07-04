@@ -1,5 +1,19 @@
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { Link } from "@/i18n/navigation";
+import { PageHeader } from "@/components/page-header";
+import { REVIEWS, averageRating } from "@/lib/reviews";
+import type { Locale } from "@/lib/portfolio";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "reviewsPage" });
+  return { title: t("title"), description: t("description") };
+}
 
 export default async function ReviewsPage({
   params,
@@ -8,31 +22,64 @@ export default async function ReviewsPage({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
-  return <ReviewsContent />;
-}
-
-function ReviewsContent() {
-  const t = useTranslations("reviewsPage");
-  const placeholders = [1, 2, 3];
+  const t = await getTranslations("reviewsPage");
+  const loc = (await getLocale()) as Locale;
+  const avg = averageRating();
 
   return (
     <section className="mx-auto max-w-4xl px-6 py-16">
-      <div className="dim-line mb-6 text-oak">
-        <span>{t("sectionLabel")}</span>
-      </div>
-      <h1 className="font-display text-4xl text-ink">{t("title")}</h1>
-      <p className="mt-4 max-w-xl text-ink/70">{t("description")}</p>
+      <PageHeader
+        label={t("sectionLabel")}
+        title={t("title")}
+        description={t("description")}
+      />
 
-      <div className="mt-10 space-y-px overflow-hidden border border-ink/15 bg-ink/15">
-        {placeholders.map((n) => (
-          <div key={n} className="bg-paper p-6">
-            <p className="font-mono text-xs uppercase text-brass">
-              {t("placeholderName", { n })}
-            </p>
-            <p className="mt-2 text-sm text-ink/60">{t("placeholderText")}</p>
-          </div>
+      <p className="mt-6 flex items-center gap-3 font-mono text-xs uppercase tracking-wide text-brass">
+        <Stars value={avg} />
+        {t("basedOn", { rating: avg, count: REVIEWS.length })}
+      </p>
+
+      <div className="mt-10 grid gap-px overflow-hidden border border-ink/15 hairline-grid sm:grid-cols-2">
+        {REVIEWS.map((r) => (
+          <figure key={r.id} className="flex flex-col gap-4 bg-paper p-6">
+            <Stars value={r.rating} />
+            <blockquote className="flex-1 text-ink/80">“{r.text[loc]}”</blockquote>
+            <figcaption className="border-t border-ink/10 pt-4">
+              <p className="font-display text-lg text-ink">{r.name}</p>
+              <p className="font-mono text-[0.7rem] uppercase tracking-wide text-ink/50">
+                {r.city[loc]} · {t("project")}: {r.project[loc]}
+              </p>
+            </figcaption>
+          </figure>
         ))}
       </div>
+
+      <div className="mt-10">
+        <Link href="/order" className="btn btn-primary">
+          {t("cta")}
+        </Link>
+      </div>
     </section>
+  );
+}
+
+function Stars({ value }: { value: number }) {
+  const full = Math.round(value);
+  return (
+    <span className="inline-flex gap-0.5 text-oak" aria-label={`${value} / 5`}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill={i < full ? "currentColor" : "none"}
+          stroke="currentColor"
+          strokeWidth="1.5"
+          aria-hidden="true"
+        >
+          <path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.2l5.9-.9L12 3z" />
+        </svg>
+      ))}
+    </span>
   );
 }

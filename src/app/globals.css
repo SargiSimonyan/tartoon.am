@@ -2,18 +2,18 @@
 @import "tw-animate-css";
 
 /* ---------------------------------------------------
-   TARTOON — токены дизайн-системы
-   Тема: язык мебельного производства — чертёж, спецификация,
-   размерные линии, нумерация деталей сборки.
+   TARTOON — design tokens
+   Theme: the language of a furniture workshop —
+   blueprint, spec sheet, dimension lines, part numbering.
 --------------------------------------------------- */
 @theme {
-  /* Цвет — 6 именованных значений */
-  --color-paper: #ede7db;      /* сырой лён/крафт-бумага чертежа */
-  --color-ink: #2b2620;        /* тёмный орех, почти чёрный — текст и линии */
-  --color-oak: #a8763e;        /* мореный дуб — основной акцент дерева */
-  --color-lacquer: #8b3a2b;    /* лаковый красно-коричневый — CTA, акцент */
-  --color-sage: #6b7a5e;       /* обивочный зелёный — вторичные метки */
-  --color-brass: #b08d57;      /* латунная фурнитура — тонкие разделители */
+  /* Colour — 6 named values */
+  --color-paper: #ede7db; /* raw linen / kraft drawing paper */
+  --color-ink: #2b2620; /* dark walnut, near-black — text & lines */
+  --color-oak: #a8763e; /* stained oak — primary wood accent */
+  --color-lacquer: #8b3a2b; /* lacquered red-brown — CTA / accent */
+  --color-sage: #6b7a5e; /* upholstery green — secondary marks */
+  --color-brass: #b08d57; /* brass hardware — thin dividers */
 
   --font-display: "Fraunces", "Georgia", serif;
   --font-body: "Inter", "Helvetica Neue", sans-serif;
@@ -22,40 +22,205 @@
   --radius-panel: 2px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Тонкая "миллиметровка" чертежа на фоне — едва заметная, не декоративная шумиха */
+::selection {
+  background: var(--color-oak);
+  color: var(--color-paper);
+}
+
+/* Consistent keyboard focus ring across interactive elements */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-lacquer);
+  outline-offset: 2px;
+}
+
+/* Faint drawing grid — used behind hero-type sections */
 .blueprint-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-ink) 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-ink) 6%, transparent) 1px,
+      transparent 1px
+    );
   background-size: 32px 32px;
 }
+/* Denser grid variant for figure/preview backdrops */
+.blueprint-grid-fine {
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-ink) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-ink) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 16px 16px;
+}
 
-/* Размерная линия — переиспользуемый элемент для подписи размеров/цен */
+/* Dimension line — reusable label with rules on both sides */
 .dim-line {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.02em;
-  color: var(--color-ink);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: currentColor;
 }
 .dim-line::before,
 .dim-line::after {
   content: "";
   height: 1px;
   flex: 1;
-  background: var(--color-brass);
+  background: currentColor;
+  opacity: 0.4;
+}
+/* left-anchored variant: rule only on the right */
+.dim-line-left::before {
+  display: none;
+}
+
+/* Small mono section eyebrow (no rules) */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-panel);
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+.btn-primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+.btn-primary:hover {
+  background: var(--color-lacquer);
+  border-color: var(--color-lacquer);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+}
+.btn-ghost:hover {
+  border-color: var(--color-lacquer);
+  color: var(--color-lacquer);
+}
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ---------- Inputs ---------- */
+.field-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-ink) 55%, transparent);
+}
+.field-input {
+  margin-top: 0.5rem;
+  width: 100%;
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+  border-radius: var(--radius-panel);
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-ink);
+  transition: border-color 0.15s ease;
+}
+.field-input::placeholder {
+  color: color-mix(in srgb, var(--color-ink) 35%, transparent);
+}
+.field-input:focus {
+  border-color: var(--color-lacquer);
+  outline: none;
+}
+
+/* Range slider styled to the theme */
+input[type="range"].blueprint-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: color-mix(in srgb, var(--color-ink) 25%, transparent);
+  cursor: pointer;
+}
+input[type="range"].blueprint-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+}
+input[type="range"].blueprint-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--color-paper);
+  border: 2px solid var(--color-ink);
+  border-radius: 50%;
+}
+
+/* Hairline grid used for card groups (bg shows through gap-px) */
+.hairline-grid {
+  background: color-mix(in srgb, var(--color-ink) 15%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

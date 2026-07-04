@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tartoon — tartoon.am
 
-## Getting Started
+Marketing + lead-generation site for **Tartoon**, a custom-furniture workshop in
+Yerevan. Trilingual (Armenian / Russian / English), built with Next.js App Router.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (App Router, React 19, React Compiler)
+- **next-intl** — locales `hy` (default), `ru`, `en`
+- **Tailwind CSS v4** with a custom "blueprint / spec-sheet" design system
+
+## Features
+
+- **Calculator** (`/calculator`) — live cost estimate from product, dimensions,
+  material and hardware, in AMD (֏).
+- **Configurator** (`/configurator`) — parametric front-elevation preview (SVG)
+  that redraws with size / sections / material / hardware, plus live price.
+- **Request form** (`/order`) — validated, posts to `/api/order`, with a
+  guaranteed WhatsApp / Telegram deep-link fallback.
+- **Portfolio** (`/portfolio`) — filterable gallery; real photos or generated
+  blueprint drawings.
+- **Reviews** (`/reviews`) — testimonials with ratings.
+- Floating quick-contact widget (WhatsApp / Telegram / call / email).
+
+## Configure before launch
+
+1. **`src/lib/site.ts`** — replace phone, email, address, map URL and the
+   WhatsApp / Telegram / Instagram / Facebook handles.
+2. **`src/lib/pricing.ts`** — tune base prices, material rates and hardware
+   tiers to match real workshop rates.
+3. **`src/lib/portfolio.ts` / `src/lib/reviews.ts`** — real projects & reviews.
+4. Add real project photos to `/public` and reference them in `portfolio.ts`.
+
+### Optional: deliver leads to Telegram
+
+Set these env vars (e.g. in Vercel) — no code change needed:
+
+```
+TELEGRAM_BOT_TOKEN=...
+TELEGRAM_CHAT_ID=...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Without them, the form still succeeds and users fall back to the WhatsApp /
+Telegram deep links.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Develop
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint
+```

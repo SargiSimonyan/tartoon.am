@@ -1,12 +1,48 @@
 {
+  "common": {
+    "from": "from",
+    "send": "Send",
+    "sending": "Sending…",
+    "close": "Close",
+    "back": "Back",
+    "viewAll": "View all",
+    "learnMore": "Learn more"
+  },
+  "catalog": {
+    "product": {
+      "wardrobe": "Wardrobe",
+      "kitchen": "Kitchen",
+      "bookshelf": "Shelving",
+      "tvunit": "TV unit",
+      "bed": "Bed",
+      "table": "Table"
+    },
+    "material": {
+      "ldsp": "Laminated chipboard",
+      "mdf": "Painted MDF",
+      "veneer": "Wood veneer",
+      "oak": "Solid oak"
+    },
+    "hardware": {
+      "standard": "Standard",
+      "softclose": "Soft-close",
+      "premium": "Premium (Blum-class)"
+    },
+    "dim": {
+      "width": "Width",
+      "height": "Height",
+      "depth": "Depth",
+      "mm": "mm"
+    }
+  },
   "nav": {
     "calculator": {
       "label": "Calculator",
-      "description": "Estimate cost by materials and dimensions"
+      "description": "Estimate the cost by material and dimensions"
     },
     "configurator": {
-      "label": "3D Configurator",
-      "description": "Build the model and see it live"
+      "label": "Configurator",
+      "description": "Build the model and preview it live"
     },
     "order": {
       "label": "Request",
@@ -18,90 +54,168 @@
     },
     "reviews": {
       "label": "Reviews",
-      "description": "What clients say"
+      "description": "What our clients say"
     },
     "crm": {
       "label": "CRM",
-      "description": "Internal request-handling panel — in development.",
-      "soon": "/admin (soon)"
+      "description": "Internal request-handling panel.",
+      "soon": "Team access"
     }
   },
   "header": {
     "tagline": "custom furniture",
-    "cta": "Send a request"
+    "cta": "Get a quote"
   },
   "footer": {
-    "specLabel": "TARTOON — SITE SPECIFICATION",
+    "specLabel": "Tartoon — site specification",
     "tagline": "Furniture, built to your drawing.",
-    "description": "Quote, 3D model, request and handover — all in one place.",
-    "phone": "+374 00 000-000",
-    "email": "hello@tartoon.example",
-    "address": "Yerevan, showroom by appointment",
-    "copyright": "© {year} Tartoon. All dimensions confirmed on-site."
+    "description": "Quote, 3D preview, request and handover — everything in one place.",
+    "navLabel": "Sections",
+    "contactLabel": "Contact",
+    "followLabel": "Follow",
+    "copyright": "© {year} Tartoon. Every dimension confirmed on-site."
   },
   "home": {
-    "drawingLabel": "DRAWING № TT-001",
+    "drawingLabel": "Drawing № TT-001",
     "title1": "Furniture,",
     "title2": "built",
     "title3": "to your drawing.",
-    "subtitle": "From cost estimate to assembly in your home: five steps, each one visible from start to finish.",
-    "ctaCalculate": "Estimate cost",
-    "ctaConfigurator": "Open 3D configurator",
-    "specLabel": "SECTION SPECIFICATION",
-    "goto": "Go →"
+    "subtitle": "From cost estimate to assembly in your home — five steps, each one visible from start to finish.",
+    "ctaCalculate": "Estimate the cost",
+    "ctaConfigurator": "Open the configurator",
+    "specLabel": "Section specification",
+    "goto": "Open",
+    "process": {
+      "label": "Assembly sequence",
+      "title": "Five steps, nothing hidden",
+      "step1": {
+        "title": "Estimate",
+        "text": "Get a transparent price from material and dimensions in a minute."
+      },
+      "step2": {
+        "title": "Configure",
+        "text": "Adjust size, material and hardware and see the result live."
+      },
+      "step3": {
+        "title": "Request",
+        "text": "Send the spec — we confirm the drawing and the timeline."
+      },
+      "step4": {
+        "title": "Build",
+        "text": "We cut, edge and assemble in our own workshop."
+      },
+      "step5": {
+        "title": "Install",
+        "text": "We deliver and mount on-site to the millimetre."
+      }
+    },
+    "featured": {
+      "label": "From the portfolio",
+      "title": "Recent work"
+    },
+    "why": {
+      "label": "Specification of trust",
+      "title": "Why Tartoon",
+      "p1": {
+        "title": "Own workshop",
+        "text": "No middlemen — we control every stage, from cut to finish."
+      },
+      "p2": {
+        "title": "Transparent pricing",
+        "text": "The calculator shows the full breakdown before you commit."
+      },
+      "p3": {
+        "title": "See it first",
+        "text": "The configurator previews your piece before a single board is cut."
+      },
+      "p4": {
+        "title": "Millimetre precision",
+        "text": "On-site measurement — the piece fits your space exactly."
+      }
+    },
+    "cta": {
+      "title": "Ready to start from a drawing?",
+      "text": "Estimate the cost or send a request — we reply within one business day.",
+      "button": "Send a request"
+    }
   },
   "calculatorPage": {
-    "sectionLabel": "SECTION 01 — CALCULATOR",
+    "sectionLabel": "Section 01 — Calculator",
     "title": "Cost calculator",
-    "description": "A step-by-step calculator will live here: product type → dimensions → material and hardware → final price breakdown. For now, a layout scaffold for the future logic.",
-    "step1": "Step 1 — product type",
-    "step1Todo": "TODO: selector (wardrobe, kitchen, bed, table…)",
-    "step2": "Step 2 — dimensions (mm)",
-    "step2Todo": "TODO: width / height / depth fields",
-    "step3": "Step 3 — material and hardware",
-    "step3Todo": "TODO: material cards with price per m²",
-    "total": "Total"
+    "description": "Choose the product, dimensions, material and hardware — the estimate updates live. The figure is a preliminary guide; the final price is confirmed after on-site measurement.",
+    "step1": "1 — Product type",
+    "step2": "2 — Dimensions (mm)",
+    "step3": "3 — Material",
+    "step4": "4 — Hardware",
+    "ratePerM2": "{rate} / m²",
+    "summary": "Estimate",
+    "total": "Approximate total",
+    "breakdown": {
+      "base": "Base ({product})",
+      "material": "Material · {area} m²",
+      "hardware": "Hardware"
+    },
+    "disclaimer": "Preliminary estimate. Final price is set after measurement and drawing approval.",
+    "cta": "Send this spec as a request"
   },
   "configuratorPage": {
-    "sectionLabel": "SECTION 02 — 3D CONFIGURATOR",
-    "title": "3D Configurator",
-    "description": "A Three.js / react-three-fiber scene will live here: product model, parameters (size, colour, front material, handles) and a live preview.",
-    "canvasTodo": "3D scene canvas (react-three-fiber) — TODO",
-    "material": "Material",
-    "materialTodo": "TODO: veneer/chipboard swatches",
-    "size": "Size",
-    "sizeTodo": "TODO: W×H×D sliders",
+    "sectionLabel": "Section 02 — Configurator",
+    "title": "Configurator",
+    "description": "Set the parameters and watch the front elevation and price redraw in real time. The drawing follows your choices — size, material and hardware.",
+    "frontView": "Front elevation",
+    "product": "Product",
+    "size": "Dimensions",
+    "material": "Front material",
     "hardware": "Hardware",
-    "hardwareTodo": "TODO: handle/hinge picker",
-    "stackNote": "Stack: three, @react-three/fiber, @react-three/drei — installed separately (npm install three @react-three/fiber @react-three/drei)."
+    "doors": "Fronts / sections",
+    "priceLabel": "Approximate price",
+    "cta": "Request this configuration",
+    "disclaimer": "A schematic preview, not a manufacturing drawing. Final geometry is agreed during design."
   },
   "orderPage": {
-    "sectionLabel": "SECTION 03 — REQUEST",
-    "title": "Submit a request",
-    "description": "The form doesn't submit data yet — needs a backend (Supabase: orders table + server action).",
+    "sectionLabel": "Section 03 — Request",
+    "title": "Send a request",
+    "description": "Leave your details and a short brief. We’ll get back within one business day to confirm the drawing, timeline and price.",
     "nameLabel": "Name",
-    "namePlaceholder": "How should we address you",
+    "namePlaceholder": "How should we address you?",
     "phoneLabel": "Phone",
-    "phonePlaceholder": "+374 00 000-000",
-    "detailsLabel": "What you need",
-    "detailsPlaceholder": "Kitchen, wardrobe, bed…",
-    "submit": "Send (TODO: connect backend)"
+    "phonePlaceholder": "+374 __ ______",
+    "emailLabel": "Email (optional)",
+    "emailPlaceholder": "you@email.com",
+    "productLabel": "What do you need?",
+    "detailsLabel": "Details",
+    "detailsPlaceholder": "Kitchen, wardrobe, bed, dimensions, deadline…",
+    "submit": "Send request",
+    "orWhatsapp": "or write on WhatsApp",
+    "successTitle": "Request sent",
+    "successText": "Thank you! We’ll contact you shortly. For a faster reply, message us on WhatsApp or Telegram.",
+    "errorText": "Something went wrong. Please try again or reach us on WhatsApp.",
+    "errName": "Please enter your name",
+    "errPhone": "Please enter a valid phone number"
   },
   "portfolioPage": {
-    "sectionLabel": "SECTION 04 — PORTFOLIO",
+    "sectionLabel": "Section 04 — Portfolio",
     "title": "Portfolio",
-    "description": "Completed projects. Photos are placeholders for now; connect Supabase Storage or a CMS gallery in production."
+    "description": "A selection of completed projects — wardrobes, kitchens, shelving and more, each built to a custom drawing.",
+    "all": "All",
+    "empty": "No projects in this category yet.",
+    "specSheet": "Spec"
   },
   "reviewsPage": {
-    "sectionLabel": "SECTION 05 — REVIEWS",
+    "sectionLabel": "Section 05 — Reviews",
     "title": "Reviews",
-    "description": "A list of reviews. Later — with a submission form and moderation (reviews table in Supabase).",
-    "placeholderName": "Client {n}",
-    "placeholderText": "TODO: a real review will appear once the form/DB is connected."
+    "description": "What clients say after delivery and installation.",
+    "basedOn": "{rating} average · {count} reviews",
+    "project": "Project",
+    "cta": "Become our next review"
   },
-  "chat": {
-    "title": "Chat with the workshop",
-    "greeting": "Hello! How can we help with your furniture project?",
-    "placeholder": "Type a message…"
+  "contact": {
+    "open": "Contact us",
+    "title": "Message the workshop",
+    "subtitle": "Reply within one business day",
+    "whatsapp": "WhatsApp",
+    "telegram": "Telegram",
+    "call": "Call",
+    "email": "Email"
   }
 }

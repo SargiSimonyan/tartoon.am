@@ -1,7 +1,10 @@
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { navItems } from "@/lib/nav";
+import { PROJECTS, type Locale } from "@/lib/portfolio";
+import { FrontElevation } from "@/components/front-elevation";
+import { MATERIALS } from "@/lib/pricing";
 
 export default async function Home({
   params,
@@ -10,20 +13,21 @@ export default async function Home({
 }) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const t = await getTranslations();
+  const loc = (await getLocale()) as Locale;
 
-  return <HomeContent />;
-}
-
-function HomeContent() {
-  const t = useTranslations();
+  const oak = MATERIALS.find((m) => m.id === "veneer")?.swatch ?? "#a8763e";
+  const featured = PROJECTS.slice(0, 3);
+  const processSteps = ["step1", "step2", "step3", "step4", "step5"] as const;
+  const whyPoints = ["p1", "p2", "p3", "p4"] as const;
 
   return (
     <>
-      {/* ---------- HERO: чертёж как тезис страницы ---------- */}
+      {/* ---------- HERO ---------- */}
       <section className="blueprint-grid border-b border-ink/10">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:items-center md:py-28">
           <div>
-            <div className="dim-line mb-6 w-fit text-oak">
+            <div className="dim-line dim-line-left mb-6 w-fit text-oak">
               <span>{t("home.drawingLabel")}</span>
             </div>
             <h1 className="font-display text-5xl leading-[1.05] tracking-tight text-ink md:text-6xl">
@@ -33,34 +37,39 @@ function HomeContent() {
               <br />
               {t("home.title3")}
             </h1>
-            <p className="mt-6 max-w-md text-ink/70">{t("home.subtitle")}</p>
+            <p className="mt-6 max-w-md text-ink/70 md:text-lg">
+              {t("home.subtitle")}
+            </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/calculator"
-                className="border border-ink bg-ink px-5 py-3 font-mono text-xs uppercase tracking-wide text-paper transition-colors hover:bg-lacquer hover:border-lacquer"
-              >
+              <Link href="/calculator" className="btn btn-primary">
                 {t("home.ctaCalculate")}
               </Link>
-              <Link
-                href="/configurator"
-                className="border border-ink px-5 py-3 font-mono text-xs uppercase tracking-wide text-ink transition-colors hover:border-lacquer hover:text-lacquer"
-              >
+              <Link href="/configurator" className="btn btn-ghost">
                 {t("home.ctaConfigurator")}
               </Link>
             </div>
           </div>
 
-          <HeroBlueprint />
+          <div className="aspect-square w-full max-w-md justify-self-center">
+            <FrontElevation
+              product="wardrobe"
+              w={2000}
+              h={2400}
+              sections={3}
+              swatch={oak}
+              handles
+            />
+          </div>
         </div>
       </section>
 
-      {/* ---------- Разделы сайта как спецификация сборки ---------- */}
+      {/* ---------- Section specification ---------- */}
       <section className="mx-auto max-w-6xl px-6 py-20">
-        <div className="dim-line mb-10 text-oak">
+        <div className="dim-line dim-line-left mb-10 text-oak">
           <span>{t("home.specLabel")}</span>
         </div>
 
-        <div className="grid gap-px overflow-hidden border border-ink/15 bg-ink/15 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-px overflow-hidden border border-ink/15 hairline-grid md:grid-cols-2 lg:grid-cols-3">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -79,7 +88,7 @@ function HomeContent() {
                 </p>
               </div>
               <span className="font-mono text-xs uppercase tracking-wide text-ink/40 group-hover:text-lacquer">
-                {t("home.goto")}
+                {t("home.goto")} →
               </span>
             </Link>
           ))}
@@ -100,49 +109,134 @@ function HomeContent() {
           </div>
         </div>
       </section>
+
+      {/* ---------- Process ---------- */}
+      <section className="border-y border-ink/10 bg-paper">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="dim-line dim-line-left mb-3 text-oak">
+            <span>{t("home.process.label")}</span>
+          </div>
+          <h2 className="font-display text-3xl tracking-tight text-ink md:text-4xl">
+            {t("home.process.title")}
+          </h2>
+
+          <ol className="mt-10 grid gap-px overflow-hidden border border-ink/15 hairline-grid sm:grid-cols-2 lg:grid-cols-5">
+            {processSteps.map((step, i) => (
+              <li key={step} className="bg-paper p-6">
+                <span className="font-mono text-sm text-brass">
+                  0{i + 1}
+                </span>
+                <h3 className="mt-4 font-display text-lg text-ink">
+                  {t(`home.process.${step}.title`)}
+                </h3>
+                <p className="mt-2 text-sm text-ink/60">
+                  {t(`home.process.${step}.text`)}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ---------- Featured work ---------- */}
+      <section className="mx-auto max-w-6xl px-6 py-20">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <div className="dim-line dim-line-left mb-3 text-oak">
+              <span>{t("home.featured.label")}</span>
+            </div>
+            <h2 className="font-display text-3xl tracking-tight text-ink md:text-4xl">
+              {t("home.featured.title")}
+            </h2>
+          </div>
+          <Link
+            href="/portfolio"
+            className="hidden shrink-0 font-mono text-xs uppercase tracking-wide text-ink/60 transition-colors hover:text-lacquer sm:block"
+          >
+            {t("common.viewAll")} →
+          </Link>
+        </div>
+
+        <div className="mt-10 grid gap-px overflow-hidden border border-ink/15 hairline-grid sm:grid-cols-3">
+          {featured.map((p) => (
+            <Link
+              key={p.id}
+              href="/portfolio"
+              className="group bg-paper"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden">
+                {p.image ? (
+                  <Image
+                    src={p.image}
+                    alt={p.title[loc]}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="blueprint-grid-fine flex h-full w-full items-center justify-center p-6">
+                    <FrontElevation
+                      product={p.category}
+                      w={p.dimensions.w}
+                      h={p.dimensions.h}
+                      sections={p.category === "kitchen" ? 4 : 3}
+                      swatch={oak}
+                      handles={["wardrobe", "kitchen", "tvunit"].includes(p.category)}
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="border-t border-ink/10 p-5">
+                <h3 className="font-display text-lg leading-snug text-ink">
+                  {p.title[loc]}
+                </h3>
+                <p className="mt-1 text-sm text-ink/60">{p.material[loc]}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ---------- Why Tartoon ---------- */}
+      <section className="border-y border-ink/10 bg-ink text-paper">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="dim-line dim-line-left mb-3 text-brass">
+            <span>{t("home.why.label")}</span>
+          </div>
+          <h2 className="font-display text-3xl tracking-tight text-paper md:text-4xl">
+            {t("home.why.title")}
+          </h2>
+
+          <div className="mt-10 grid gap-px overflow-hidden border border-paper/15 sm:grid-cols-2 lg:grid-cols-4">
+            {whyPoints.map((p, i) => (
+              <div key={p} className="bg-ink p-6">
+                <span className="font-mono text-sm text-brass">0{i + 1}</span>
+                <h3 className="mt-4 font-display text-lg text-paper">
+                  {t(`home.why.${p}.title`)}
+                </h3>
+                <p className="mt-2 text-sm text-paper/60">
+                  {t(`home.why.${p}.text`)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- Final CTA ---------- */}
+      <section className="blueprint-grid">
+        <div className="mx-auto flex max-w-6xl flex-col items-start gap-6 px-6 py-20 md:flex-row md:items-center md:justify-between">
+          <div>
+            <h2 className="font-display text-3xl tracking-tight text-ink md:text-4xl">
+              {t("home.cta.title")}
+            </h2>
+            <p className="mt-3 max-w-lg text-ink/70">{t("home.cta.text")}</p>
+          </div>
+          <Link href="/order" className="btn btn-primary shrink-0">
+            {t("home.cta.button")}
+          </Link>
+        </div>
+      </section>
     </>
-  );
-}
-
-function HeroBlueprint() {
-  return (
-    <svg
-      viewBox="0 0 420 340"
-      className="w-full max-w-md justify-self-center text-ink"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
-    >
-      <rect x="80" y="40" width="220" height="240" />
-      <line x1="190" y1="40" x2="190" y2="280" />
-      <line x1="80" y1="120" x2="190" y2="120" />
-      <line x1="80" y1="200" x2="190" y2="200" />
-      <rect x="196" y="46" width="98" height="228" strokeDasharray="3 3" />
-      <circle cx="284" cy="160" r="2.5" fill="currentColor" />
-
-      <line x1="80" y1="300" x2="300" y2="300" stroke="currentColor" strokeWidth="1" />
-      <line x1="80" y1="294" x2="80" y2="306" />
-      <line x1="300" y1="294" x2="300" y2="306" />
-      <text x="190" y="318" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="11" fill="currentColor" stroke="none">
-        900 mm
-      </text>
-
-      <line x1="330" y1="40" x2="330" y2="280" stroke="currentColor" strokeWidth="1" />
-      <line x1="324" y1="40" x2="336" y2="40" />
-      <line x1="324" y1="280" x2="336" y2="280" />
-      <text x="355" y="164" textAnchor="middle" fontFamily="var(--font-mono)" fontSize="11" fill="currentColor" stroke="none" transform="rotate(90 355 164)">
-        2100 mm
-      </text>
-
-      <g fontFamily="var(--font-mono)" fontSize="10" fill="currentColor" stroke="none">
-        <circle cx="60" cy="80" r="9" stroke="currentColor" strokeWidth="1" fill="var(--color-paper)" />
-        <text x="60" y="83" textAnchor="middle">01</text>
-        <line x1="69" y1="80" x2="80" y2="90" stroke="currentColor" strokeWidth="0.8" />
-
-        <circle cx="60" cy="240" r="9" stroke="currentColor" strokeWidth="1" fill="var(--color-paper)" />
-        <text x="60" y="243" textAnchor="middle">02</text>
-        <line x1="69" y1="240" x2="80" y2="230" stroke="currentColor" strokeWidth="0.8" />
-      </g>
-    </svg>
   );
 }
