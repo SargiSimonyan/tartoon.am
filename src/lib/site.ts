@@ -14,14 +14,14 @@ export const site = {
   url: "https://tartoon.am",
 
   /** Contact — REPLACE with real values */
-  phone: "+374 00 000000", // display + tel: link
-  email: "info@tartoon.am",
+  phone: "+374 33 228883", // display + tel: link
+  email: "sargissimonyan2@gmail.com",
 
   /** Messengers — REPLACE handles/numbers. Empty string hides the channel. */
-  whatsapp: "37400000000", // digits only, no + or spaces (used in wa.me/<number>)
-  telegram: "tartoon_am", // username without @ (used in t.me/<username>)
+  whatsapp: "37433228883", // digits only, no + or spaces (used in wa.me/<number>)
+  telegram: "sargisimonyan", // username without @ (used in t.me/<username>)
   instagram: "tartoon.am", // username without @
-  facebook: "", // page slug, e.g. "tartoon.am" — empty hides it
+  facebook: "sargis", // page slug, e.g. "tartoon.am" — empty hides it
 
   /** Physical location — REPLACE */
   address: {
