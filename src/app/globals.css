@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ---------------------------------------------------
+   TARTOON — токены дизайн-системы
+   Тема: язык мебельного производства — чертёж, спецификация,
+   размерные линии, нумерация деталей сборки.
+--------------------------------------------------- */
+@theme {
+  /* Цвет — 6 именованных значений */
+  --color-paper: #ede7db;      /* сырой лён/крафт-бумага чертежа */
+  --color-ink: #2b2620;        /* тёмный орех, почти чёрный — текст и линии */
+  --color-oak: #a8763e;        /* мореный дуб — основной акцент дерева */
+  --color-lacquer: #8b3a2b;    /* лаковый красно-коричневый — CTA, акцент */
+  --color-sage: #6b7a5e;       /* обивочный зелёный — вторичные метки */
+  --color-brass: #b08d57;      /* латунная фурнитура — тонкие разделители */
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", "Helvetica Neue", sans-serif;
+  --font-mono: "JetBrains Mono", "Menlo", monospace;
+
+  --radius-panel: 2px;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+/* Тонкая "миллиметровка" чертежа на фоне — едва заметная, не декоративная шумиха */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 6%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Размерная линия — переиспользуемый элемент для подписи размеров/цен */
+.dim-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+.dim-line::before,
+.dim-line::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--color-brass);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

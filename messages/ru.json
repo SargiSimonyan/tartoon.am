@@ -1,0 +1,107 @@
+{
+  "nav": {
+    "calculator": {
+      "label": "Калькулятор",
+      "description": "Расчёт стоимости по материалам и размерам"
+    },
+    "configurator": {
+      "label": "3D-конфигуратор",
+      "description": "Соберите модель и посмотрите её вживую"
+    },
+    "order": {
+      "label": "Заявка",
+      "description": "Оформить заказ или консультацию"
+    },
+    "portfolio": {
+      "label": "Портфолио",
+      "description": "Реализованные проекты"
+    },
+    "reviews": {
+      "label": "Отзывы",
+      "description": "Что говорят клиенты"
+    },
+    "crm": {
+      "label": "CRM",
+      "description": "Внутренняя панель обработки заявок — на этапе проектирования.",
+      "soon": "/admin (скоро)"
+    }
+  },
+  "header": {
+    "tagline": "мебель на заказ",
+    "cta": "Оставить заявку"
+  },
+  "footer": {
+    "specLabel": "TARTOON — СПЕЦИФИКАЦИЯ САЙТА",
+    "tagline": "Мебель, собранная под ваш чертёж.",
+    "description": "Расчёт, 3D-модель, заявка и приёмка — всё в одном месте.",
+    "phone": "+374 00 000-000",
+    "email": "hello@tartoon.example",
+    "address": "Ереван, шоурум по записи",
+    "copyright": "© {year} Tartoon. Все размеры уточняются на замере."
+  },
+  "home": {
+    "drawingLabel": "ЧЕРТЁЖ № TT-001",
+    "title1": "Мебель,",
+    "title2": "собранная",
+    "title3": "под ваш чертёж.",
+    "subtitle": "От расчёта стоимости до сборки в квартире: пять шагов, на каждом из которых видно, что происходит с вашим заказом.",
+    "ctaCalculate": "Рассчитать стоимость",
+    "ctaConfigurator": "Открыть 3D-конфигуратор",
+    "specLabel": "СПЕЦИФИКАЦИЯ РАЗДЕЛОВ",
+    "goto": "Перейти →"
+  },
+  "calculatorPage": {
+    "sectionLabel": "РАЗДЕЛ 01 — КАЛЬКУЛЯТОР",
+    "title": "Расчёт стоимости",
+    "description": "Здесь будет пошаговый калькулятор: тип изделия → размеры → материал и фурнитура → итоговая цена с разбивкой. Пока — макет разметки под будущую логику.",
+    "step1": "Шаг 1 — тип изделия",
+    "step1Todo": "TODO: селектор (шкаф, кухня, кровать, стол…)",
+    "step2": "Шаг 2 — размеры (мм)",
+    "step2Todo": "TODO: поля ширина / высота / глубина",
+    "step3": "Шаг 3 — материал и фурнитура",
+    "step3Todo": "TODO: карточки материалов с ценой за м²",
+    "total": "Итог"
+  },
+  "configuratorPage": {
+    "sectionLabel": "РАЗДЕЛ 02 — 3D-КОНФИГУРАТОР",
+    "title": "3D-конфигуратор",
+    "description": "Здесь будет сцена на Three.js / react-three-fiber: модель изделия, параметры (размер, цвет, материал фасада, ручки) и живой предпросмотр.",
+    "canvasTodo": "Canvas 3D-сцены (react-three-fiber) — TODO",
+    "material": "Материал",
+    "materialTodo": "TODO: свотчи шпона/ЛДСП",
+    "size": "Размер",
+    "sizeTodo": "TODO: слайдеры Ш×В×Г",
+    "hardware": "Фурнитура",
+    "hardwareTodo": "TODO: выбор ручек/петель",
+    "stackNote": "Стек: three, @react-three/fiber, @react-three/drei — устанавливаются отдельно (npm install three @react-three/fiber @react-three/drei)."
+  },
+  "orderPage": {
+    "sectionLabel": "РАЗДЕЛ 03 — ЗАЯВКА",
+    "title": "Оформить заявку",
+    "description": "Форма пока не отправляет данные — нужно подключить бэкенд (Supabase: таблица orders + server action).",
+    "nameLabel": "Имя",
+    "namePlaceholder": "Как к вам обращаться",
+    "phoneLabel": "Телефон",
+    "phonePlaceholder": "+374 00 000-000",
+    "detailsLabel": "Что нужно",
+    "detailsPlaceholder": "Кухня, шкаф-купе, кровать…",
+    "submit": "Отправить (TODO: подключить бэкенд)"
+  },
+  "portfolioPage": {
+    "sectionLabel": "РАЗДЕЛ 04 — ПОРТФОЛИО",
+    "title": "Портфолио",
+    "description": "Реализованные проекты. Фото пока — заглушки; в проде подключить Supabase Storage или CMS-галерею."
+  },
+  "reviewsPage": {
+    "sectionLabel": "РАЗДЕЛ 05 — ОТЗЫВЫ",
+    "title": "Отзывы",
+    "description": "Список отзывов. В дальнейшем — с формой добавления и модерацией (таблица reviews в Supabase).",
+    "placeholderName": "Клиент {n}",
+    "placeholderText": "TODO: реальный отзыв появится после подключения формы/БД."
+  },
+  "chat": {
+    "title": "Чат с мастерской",
+    "greeting": "Здравствуйте! Чем можем помочь с проектом мебели?",
+    "placeholder": "Написать сообщение…"
+  }
+}
