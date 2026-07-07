@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
   {
     id: "walk-in-wardrobe",
     category: "wardrobe",
-    image: null,
+    image: "/paharan.jpg",
     title: {
       hy: "Հանդերձարան՝ ապակե ճակատներով",
       ru: "Гардеробная со стеклянными фасадами",
@@ -54,7 +54,7 @@ export const PROJECTS: Project[] = [
   {
     id: "island-kitchen",
     category: "kitchen",
-    image: null,
+    image: "/kitchen.jpg",
     title: {
       hy: "Խոհանոց կղզյակով",
       ru: "Кухня с островом",
@@ -71,7 +71,7 @@ export const PROJECTS: Project[] = [
   {
     id: "oak-dining-table",
     category: "table",
-    image: null,
+    image: "/table.jpg",
     title: {
       hy: "Ճաշասեղան կաղնու զանգվածից",
       ru: "Обеденный стол из массива дуба",
@@ -88,7 +88,7 @@ export const PROJECTS: Project[] = [
   {
     id: "floating-tv-unit",
     category: "tvunit",
-    image: null,
+    image: "/tvzone.jpg",
     title: {
       hy: "Կախովի TV վահանակ",
       ru: "Подвесная ТВ-тумба",
@@ -105,7 +105,7 @@ export const PROJECTS: Project[] = [
   {
     id: "platform-bed",
     category: "bed",
-    image: null,
+    image: "/bedroom.jpg",
     title: {
       hy: "Հարթակ-մահճակալ փափուկ գլխամասով",
       ru: "Кровать-платформа с мягким изголовьем",
