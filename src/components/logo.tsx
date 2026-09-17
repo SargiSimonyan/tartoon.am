@@ -4,6 +4,7 @@
  * Monochrome via currentColor so it inherits ink/paper from context.
  */
 
+
 export function LogoMark({ className }: { className?: string }) {
   // Regular octagon inscribed in a 48×48 box
   const pts = octagonPoints(24, 24, 21);
@@ -38,10 +39,9 @@ export function Logo({
 }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className ?? ""}`}>
-      <LogoMark className={markClassName ?? "h-7 w-7 text-oak"} />
       {showWordmark && (
         <span className="font-display text-xl leading-none tracking-tight text-ink">
-          Tartoon
+          <img src = "logo.svg"/>
         </span>
       )}
     </span>
