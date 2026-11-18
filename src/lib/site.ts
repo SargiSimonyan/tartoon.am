@@ -21,7 +21,7 @@ export const site = {
   whatsapp: "37433228883", // digits only, no + or spaces (used in wa.me/<number>)
   telegram: "sargisimonyan", // username without @ (used in t.me/<username>)
   instagram: "tartoon.am", // username without @
-  facebook: "sargis", // page slug, e.g. "tartoon.am" — empty hides it
+  facebook: "sargis.simonyan.338", // page slug, e.g. "tartoon.am" — empty hides it
 
   /** Physical location — REPLACE */
   address: {
